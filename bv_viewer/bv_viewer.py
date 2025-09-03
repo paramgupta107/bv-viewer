@@ -153,22 +153,22 @@ body {{
 	<div id="ui-panel">
 		<span class="program-name">BezierView.js</span>
 		<span class="top-level">
-			<a id="top-level-shader-settings" href="#">Shader Settings</a>
+			<a id="top-level-shader-settings">Shader Settings</a>
 		</span>
 		<span class="top-level">
-			<a id="top-level-curvature" href="#">Curvature</a>
+			<a id="top-level-curvature" >Curvature</a>
 		</span>
 		<span class="top-level">
-			<a id="top-level-display" href="#">Display</a>
+			<a id="top-level-display" >Display</a>
 		</span>
 		<span class="top-level">
-			<a id="top-level-groups" href="#">Groups</a>
+			<a id="top-level-groups" >Groups</a>
 		</span>
 		<span class="top-level">
-			<a id="top-level-other" href="#">Other</a>
+			<a id="top-level-other" >Other</a>
 		</span>
 		<span class="top-level">
-			<a id="top-level-help" href="#">Help</a>
+			<a id="top-level-help" >Help</a>
 		</span>
 
 		<div id="bottom-level-shader-settings" class="bottom-level">
