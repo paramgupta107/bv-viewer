@@ -1,4 +1,4 @@
-from IPython.display import IFrame
+from IPython.display import HTML, display
 from pathlib import Path
 
 
@@ -25,7 +25,7 @@ def display_bv_string(bv_text, width=800, height=400):
 	<link rel="shortcut icon" href="favicon.ico">
 	
 	<style>
-		html, body {{ overscroll-behavior: none; }}
+		html, body {{ overscroll-behavior: none;}}
 
 		div#ui-brand {{
 	z-index: 3;
@@ -103,10 +103,9 @@ canvas#drawing {{
 	top: 0;
 	left: 0;
 	cursor: default;
-	width: 100%;
-	height: 100%;
+    height: 100%;
+    width: 100%;
 }}
-
 .navbar-header img {{
 	float: left;
 	height: 40px;
@@ -128,8 +127,7 @@ body {{
 	overflow: hidden;
 	margin: 0;
 	padding: 0;
-	width: 100%;
-	height: 100%;
+
 	top: 0;
 	left: 0;
 	background-repeat: repeat;
@@ -151,6 +149,7 @@ body {{
 	</style>
   </head>
   <body>
+    <div id = "container" style = " height:{height}px !important; width:{width}px !important;" >
 	<div id="ui-panel">
 		<span class="program-name">BezierView.js</span>
 		<span class="top-level">
@@ -393,7 +392,7 @@ body {{
 
 	<!--<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>-->
 	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>-->
-	<script src="https://cdn.rawgit.com/eligrey/FileSaver.js/62d219a0fac54b94cd4f230e7bfc55aa3f8dcfa4/FileSaver.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 	<script>/*
 		the Vec3 class does have a fourth element called 'd' that
 		is the rational point and not considered a member
@@ -522,8 +521,7 @@ body {{
 		function det3(x11, x12, x13, x21, x22, x23, x31, x32, x33) {{
 			return x11 * x22 * x33 - x11 * x23 * x32 - x12 * x21 * x33 + x12 * x23 * x31 + x13 * x21 * x32 - x13 * x22 * x31;
 		}}
-	</script>
-	<script>
+
 	var PatchType;
 		(function (PatchType) {{
 			PatchType[PatchType["Triangle"] = 1] = "Triangle";
@@ -1024,8 +1022,7 @@ body {{
 			}}
 			out_p.copy(buffer[0]);
 		}}
-	</script>
-	<script>
+
 		var RenderablePatch = /** @class */ (function () {{
     function RenderablePatch(gl, patch) {{
         this.patch = patch;
@@ -1584,8 +1581,7 @@ function readBVFile(gl, text) {{
     return groups;
 }}
 
-	</script>
-	<script>
+
 		/* important: all matrices are given in column ordering,
 so a matrix is stored with it's array indices as follows:
 0   4   8   12
@@ -1675,8 +1671,7 @@ var Mat4 = /** @class */ (function () {{
     return Mat4;
 }}());
 
-	</script>
-	<script>
+
 		var GroupColors = [
     {{ name: 'Yellow', value: [0.7, 0.7, 0.1, 1.0] }},
     {{ name: 'Green', value: [0.1, 0.7, 0.1, 1.0] }},
@@ -2098,6 +2093,7 @@ function loadBezierObject(text) {{
     resetProjection();
 }}
 function preload() {{
+    console.log('loading resources');
     var vssrc = `attribute vec4 inputPosition; 
 				attribute vec3 inputNormal;
 
@@ -2837,8 +2833,11 @@ function InitColorDialogBox() {{
 }}
 function resizeCanvas(e) {{
     var canvas = renderState.context.canvas;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+
+    canvas.width  = rect.width  * dpr;
+    canvas.height = rect.height * dpr;
     updateProjection();
 }}
 // curvature clamping
@@ -2870,10 +2869,9 @@ function setCurvatureType(type) {{
     settings.curvatureType = type;
     updateCurvatureClampIfDirty(renderState.globalGroup.minCrv[settings.curvatureType], renderState.globalGroup.maxCrv[settings.curvatureType]);
 }}
-window.addEventListener('load', preload);
+preload();
 
-	</script>
-    <script>
+
 		function savedPositionsRefresh(after) {{
     var o = document.getElementById('select-load-position');
     while (o.hasChildNodes()) {{
@@ -3099,14 +3097,16 @@ addMyEventListeners();
     }}
 
 	</script>
+    </div>
   </body>
 </html>
 
     """
     p = Path("bv_tmp.html")
     p.write_text(html_code, encoding="utf-8")
-    frame = IFrame("bv_tmp.html", width=width, height=height)
-    return frame
+    # frame = IFrame("bv_tmp.html", width=width, height=height)
+    return display(HTML(html_code))
+    # return frame
 
 
 
