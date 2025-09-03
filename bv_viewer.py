@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[51]:
-
-
 from IPython.display import IFrame
 from pathlib import Path
 
