@@ -1,0 +1,10 @@
+from setuptools import setup, find_packages
+
+setup(
+    name='bv-viewer',
+    version='0.1.0',
+    author='Param Gupta',
+    author_email='p.gupta@ufl.edu',
+    description='BV viewer for jupyter notebooks',
+    packages=find_packages(),    
+)
