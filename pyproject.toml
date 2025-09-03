@@ -3,8 +3,8 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "bv-viewer"          # distribution name on PyPI; hyphens are fine
+name = "bv-viewer"
 version = "0.1.0"
 
-[tool.setuptools]
-py-modules = ["bv_viewer"]  # tells setuptools to package the single bv_viewer.py
+[tool.setuptools.packages.find]
+include = ["bv_viewer"]
